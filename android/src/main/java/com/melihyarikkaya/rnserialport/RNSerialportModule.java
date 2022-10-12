@@ -34,6 +34,8 @@ import android.hardware.usb.UsbManager;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
+import android.os.Build;
+
 public class RNSerialportModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
@@ -560,11 +562,11 @@ public class RNSerialportModule extends ReactContextBaseJavaModule {
   private void requestUserPermission() {
     if(device == null)
       return;
-
+    
     PendingIntent mPendingIntent;
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      mPendingIntent = PendingIntent.getBroadcast(reactContext, 0 , new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      mPendingIntent = PendingIntent.getBroadcast(reactContext, 0 , new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
     }else {
       mPendingIntent = PendingIntent.getBroadcast(reactContext, 0 , new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_UPDATE_CURRENT);
